@@ -95,5 +95,10 @@ submit_btn.onclick = function () {
         return;
     }
 
-    comments_section.innerHTML += `<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`;
+    if (localStorage.getItem("comments") != null) {
+        localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+    } else {
+        localStorage.setItem("comments", `<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+    }
+    comments_section.innerHTML = localStorage.getItem("comments");
 };
