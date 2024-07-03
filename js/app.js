@@ -111,10 +111,12 @@ input_form.onsubmit = function (event) {
         return;
     }
 
+    const comment_html = `<p class="comment-text">${formData.get("name")}, ${formData.get("email")}: ${formData.get("comment")}</p>`;
+
     if (localStorage.getItem("comments") != null) {
-        localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${formData.get("name")}, ${formData.get("email")}: ${formData.get("comment")}</p>`);
+        localStorage.setItem("comments", localStorage.getItem("comments")+comment_html);
     } else {
-        localStorage.setItem("comments", `<p>${formData.get("name")}, ${formData.get("email")}: ${formData.get("comment")}</p>`);
+        localStorage.setItem("comments", comment_html);
     }
     comments_section.innerHTML = localStorage.getItem("comments");
 };

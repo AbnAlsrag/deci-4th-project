@@ -1,8 +1,8 @@
 # deci-4th-project
-deci 4th project
-
-# Project
+## Project
 This is a stupid project i am forced to do.
+A project about a website idk.
 
-# Skills needed
+## Skills needed
 **Idiocy**
+JS, HTML, CSS or whatever.

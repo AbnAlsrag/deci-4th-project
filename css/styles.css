@@ -95,6 +95,7 @@ section {
     z-index: 5;
 }
 
+
 /* Footer Styles */
 .page__footer {
     background: #171a53;
@@ -274,3 +275,7 @@ section.active .landing__container::after {
 }
 
 /* TODO: Add styles for Comments section and form */
+
+.comment-text {
+    color: #2015ff;
+}
