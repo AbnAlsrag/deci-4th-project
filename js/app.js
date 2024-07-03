@@ -1,15 +1,3 @@
-const main = document.getElementById("main");
-const comments = document.getElementById("comments");
-const comments_section = document.getElementById("comments-section");
-const navbar_list = document.getElementById("navbar__list");
-const name_input = document.getElementById("name-input");
-const email_input = document.getElementById("email-input");
-const comment_input = document.getElementById("comment-input");
-const submit_btn = document.getElementById("submit-btn");
-
-let sections = [];
-let previous_section = 0;
-
 const section_4_html = `<section id="section4" data-nav="Section 4">
                         <div class="landing__container">
                         <h2>Section 4</h2>
@@ -20,9 +8,35 @@ const section_4_html = `<section id="section4" data-nav="Section 4">
                         <p>Aliquam a convallis justo. Vivamus venenatis, erat eget pulvinar gravida, ipsum lacus aliquet velit, vel
                             luctus diam ipsum a diam. Cras eu tincidunt arcu, vitae rhoncus purus.</p>
                         </div>
-                        </section>`
+                        </section>`;
+
+const comments_section_html =  `<section id="comments" data-nav="Comments">
+                                  <div class="landing__container">
+                                    <h2>Comments</h2>
+                                    <form action="" id="input-form">
+                                      <input type="text" name="name">
+                                      <input type="email" name="email">
+                                      <input type="text" name="comment">
+                                      <button>Submit</button>
+                                    </form>
+                                    <section id="comments-section">
+                                    
+                                    </section>
+                                  </div>
+                                </section>`;
+
+const main = document.getElementById("main");
 
 main.innerHTML += section_4_html;
+main.innerHTML += comments_section_html;
+
+const comments = document.getElementById("comments");
+const comments_section = document.getElementById("comments-section");
+const navbar_list = document.getElementById("navbar__list");
+const input_form = document.getElementById("input-form");
+
+let sections = [];
+let previous_section = 0;
 
 {
     let current = undefined;
@@ -58,9 +72,9 @@ buttons[buttons.length-1].onclick = function () {
 const callback = (entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+            entry.target.classList.add('active');
         } else {
-        entry.target.classList.remove('active');
+            entry.target.classList.remove('active');
         }
     });
 };
@@ -84,21 +98,46 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-submit_btn.onclick = function () {
-    if (!isValidEmail(email_input.value)) {
+input_form.onsubmit = function (event) {
+    var formData = new FormData(input_form);
+  
+    if (!isValidEmail(formData.get("email"))) {
         alert("wrong email");
         return;
     }
 
-    if (name_input.value.length === 0 || comment_input.value.length === 0) {
+    if (formData.get("name").length === 0 || formData.get("comment").length === 0) {
         alert("wrong name or comment");
         return;
     }
 
     if (localStorage.getItem("comments") != null) {
-        localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+        localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${formData.get("name")}, ${formData.get("email")}: ${formData.get("comment")}</p>`);
     } else {
-        localStorage.setItem("comments", `<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+        localStorage.setItem("comments", `<p>${formData.get("name")}, ${formData.get("email")}: ${formData.get("comment")}</p>`);
     }
     comments_section.innerHTML = localStorage.getItem("comments");
 };
+
+window.onload = function () {
+    comments_section.innerHTML = localStorage.getItem("comments");
+};
+
+// submit_btn.onclick = function () {
+//     if (!isValidEmail(email_input.value)) {
+//         alert("wrong email");
+//         return;
+//     }
+
+//     if (name_input.value.length === 0 || comment_input.value.length === 0) {
+//         alert("wrong name or comment");
+//         return;
+//     }
+
+//     if (localStorage.getItem("comments") != null) {
+//         localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+//     } else {
+//         localStorage.setItem("comments", `<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
+//     }
+//     comments_section.innerHTML = localStorage.getItem("comments");
+// };
