@@ -5,7 +5,6 @@
  * For simplicity, no reset or normalize is added.
  * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
  *
- * TODO: Feel free to make any changes you'd like to personalize your project. Alternatively,  * you can start from scratch!
 */
 
 /* ---- Base Rules ---- */
@@ -273,8 +272,6 @@ section.active .landing__container::after {
         transform: rotate(360deg) translate(-1em) rotate(-360deg);
     }
 }
-
-/* TODO: Add styles for Comments section and form */
 
 .comment-text {
     color: #2015ff;

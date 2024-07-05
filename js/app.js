@@ -98,15 +98,24 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
+if (localStorage.getItem("commented")) {
+    localStorage.setItem("commented", false);
+    comments.scrollIntoView({ block: 'end',  behavior: 'smooth' });
+}
+
 input_form.onsubmit = function (event) {
+    localStorage.setItem("commented", true);
+    // event.PreventDefualt();
     var formData = new FormData(input_form);
   
     if (!isValidEmail(formData.get("email"))) {
+        // event.PreventDefualt();
         alert("wrong email");
         return;
     }
-
+    
     if (formData.get("name").length === 0 || formData.get("comment").length === 0) {
+        // event.PreventDefualt();
         alert("wrong name or comment");
         return;
     }
@@ -124,22 +133,3 @@ input_form.onsubmit = function (event) {
 window.onload = function () {
     comments_section.innerHTML = localStorage.getItem("comments");
 };
-
-// submit_btn.onclick = function () {
-//     if (!isValidEmail(email_input.value)) {
-//         alert("wrong email");
-//         return;
-//     }
-
-//     if (name_input.value.length === 0 || comment_input.value.length === 0) {
-//         alert("wrong name or comment");
-//         return;
-//     }
-
-//     if (localStorage.getItem("comments") != null) {
-//         localStorage.setItem("comments", localStorage.getItem("comments")+`<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
-//     } else {
-//         localStorage.setItem("comments", `<p>${name_input.value}, ${email_input.value}: ${comment_input.value}</p>`);
-//     }
-//     comments_section.innerHTML = localStorage.getItem("comments");
-// };
